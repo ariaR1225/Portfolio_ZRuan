@@ -1,0 +1,487 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Robot Jenga Assistant - Hang Yin</title>
+<meta name="description" content="ROS2, MoveIt, OpenCV, Machine Learning">
+
+
+  <meta name="author" content="Hang Yin">
+  
+  <meta property="article:author" content="Hang Yin">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Hang Yin">
+<meta property="og:title" content="Robot Jenga Assistant">
+<meta property="og:url" content="http://localhost:4000/portfolio/jenga/">
+
+
+  <meta property="og:description" content="ROS2, MoveIt, OpenCV, Machine Learning">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/jenga.gif">
+
+
+
+
+
+  <meta property="article:published_time" content="2024-06-05T22:25:12-07:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/portfolio/jenga/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hang Yin Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hang Yin
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/">More about me</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://raw.githubusercontent.com/hang-yin/portfolio/gh-pages/assets/ZhianRuan_Robotics.pdf">Resume</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/bio-photo1.png" alt="Hang Yin" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Hang Yin</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>MS in Robotics @ Northwestern</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Evanston, IL</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/hang-yin" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="mailto:hangyin2023@u.northwestern.edu" rel="nofollow noopener noreferrer me"><i class="fa fa-fw fa-envelope" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/hangyin0226/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Robot Jenga Assistant">
+    <meta itemprop="description" content="ROS2, MoveIt, OpenCV, Machine Learning">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/portfolio/jenga/" class="u-url" itemprop="url">Robot Jenga Assistant
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        
+<p>This project is meant to turn a Franka Emika Panda arm into a Jenga assistant! It uses computer vision to detect Jenga bricks and place them on top of the tower. The robot plans and executes trajectories using a custom MoveGroup API.</p>
+
+<h2 id="video-demo">Video Demo</h2>
+<iframe width="100%" height="50px" src="https://www.youtube.com/embed/aCotjAaHfwM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+
+<h2 id="calibration">Calibration</h2>
+
+<ul>
+  <li>Calibrating the robot relies on adding frames to the tf tree based on known geometry.</li>
+  <li>The robot is sent to a calibration position, then given an april tag that aligns with the gripper frame.</li>
+  <li>Once the camera can see the tag, it creates series of transforms from the camera to the tag and finally to the base of the robot.</li>
+  <li>Calibration pose:</li>
+</ul>
+
+<p><img src="http://localhost:4000/assets/images/jenga-calibration.png" alt="Calibration Pose" /></p>
+
+<h2 id="tower-detection">Tower Detection</h2>
+
+<ul>
+  <li>We detect the tower using the depth image from an Intel Realsense camera.</li>
+  <li>Once the top of the tower and the table are found by generating contours on the depth image, we repeatedly scan between these locations looking for partially removed pieces.</li>
+  <li>The starting orientation of the tower is determined through line detection in OpenCV.</li>
+</ul>
+
+<p><img src="http://localhost:4000/assets/images/jenga-tower-detection.png" alt="Tower Detection" /></p>
+
+<h2 id="machine-learning-for-hand-detection">Machine Learning for Hand Detection</h2>
+
+<ul>
+  <li>Overview:
+    <ul>
+      <li>We performed transfer learning on a deep neural network to help us detect whether there are hands in the scene so that the robot knows when it should look for a Jenga brick.</li>
+    </ul>
+  </li>
+  <li>Dataset:
+    <ul>
+      <li>Video samples of the Jenga tower were taken and separated into two classes: with hand(s) and without hand(s) around.</li>
+      <li>1000 images were extracted from each class.</li>
+    </ul>
+  </li>
+  <li>Model:
+    <ul>
+      <li>We performed transfer learning on a pretrained neural network - MobileNets</li>
+      <li>The MobileNet we are using implements depth-wise separable convolutions to build light weight deep neural networks</li>
+      <li>We only train the last layer of the MobileNet to perform our specific task</li>
+    </ul>
+  </li>
+  <li>Training:
+    <ul>
+      <li>Epochs: 50</li>
+      <li>Batch Size: 16</li>
+      <li>Learning Rate: 0.001</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="custom-moveit-library">Custom MoveIt Library</h2>
+<ul>
+  <li>Overview:
+    <ul>
+      <li>This package allows us to move our robot around while also avoiding objects by using different services.</li>
+    </ul>
+  </li>
+  <li>GetCartesianPath:
+    <ul>
+      <li>Moves the end-effector gripper in a straight line from start to end.</li>
+      <li>Uses multiple intermediate waypoints to ensure straight path.</li>
+    </ul>
+  </li>
+  <li>GetPositionIK:
+    <ul>
+      <li>Calculates possible joint positions of robot from a given start and end position and orientation for the end-effector.</li>
+      <li>Used to Orient the gripper without shifting the position .</li>
+      <li>Used to move the robot when straight movement is not necessary.</li>
+    </ul>
+  </li>
+  <li>GetPlanningScene:
+    <ul>
+      <li>The environment around the robot.</li>
+      <li>This allows us to add in the table, camera, and jenga tower to avoid collisions .</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="http://localhost:4000/assets/images/jenga-moveit.png" alt="MoveIt Visual" /></p>
+
+<h2 id="source-code">Source code</h2>
+<p><a href="https://github.com/hang-yin/Jenga-Assistance">Github repo</a></p>
+
+<h2 id="reference">Reference</h2>
+<ul>
+  <li>Howard, A., Zhu, M., Chen, B., Kalenichenko, D., Wang, W., Weyand, T., Andreetto, M., &amp; Adam, H. (2017). MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications. <a href="https://doi.org/10.48550/ARXIV.1704.04861">https://doi.org/10.48550/ARXIV.1704.04861</a></li>
+</ul>
+
+<h2 id="group-members">Group members</h2>
+<p>Hang Yin, Katie Hughes, Liz Metzger, Alyssa Chen</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Robot+Jenga+Assistant%20http%3A%2F%2Flocalhost%3A4000%2Fportfolio%2Fjenga%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fportfolio%2Fjenga%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fportfolio%2Fjenga%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/portfolio/imu-emg/" class="pagination--pager" title="IMU Controlled Robot Arm
+">Previous</a>
+    
+    
+      <a href="/portfolio/lifecapsule/" class="pagination--pager" title="Mobile: Lifecapsule App
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/hang-yin" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Hang Yin. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

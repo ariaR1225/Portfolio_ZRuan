@@ -1,0 +1,447 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Quadrotor Control - Hang Yin</title>
+<meta name="description" content="Raspberry Pi, PID control, C++">
+
+
+  <meta name="author" content="Hang Yin">
+  
+  <meta property="article:author" content="Hang Yin">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Hang Yin">
+<meta property="og:title" content="Quadrotor Control">
+<meta property="og:url" content="http://localhost:4000/portfolio/quadrotor/">
+
+
+  <meta property="og:description" content="Raspberry Pi, PID control, C++">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/quadrotor.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2024-06-05T22:25:12-07:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/portfolio/quadrotor/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hang Yin Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hang Yin
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/">More about me</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://raw.githubusercontent.com/hang-yin/portfolio/gh-pages/assets/ZhianRuan_Robotics.pdf">Resume</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/bio-photo1.png" alt="Hang Yin" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Hang Yin</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>MS in Robotics @ Northwestern</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Evanston, IL</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/hang-yin" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="mailto:hangyin2023@u.northwestern.edu" rel="nofollow noopener noreferrer me"><i class="fa fa-fw fa-envelope" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/hangyin0226/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Quadrotor Control">
+    <meta itemprop="description" content="Raspberry Pi, PID control, C++">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/portfolio/quadrotor/" class="u-url" itemprop="url">Quadrotor Control
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        
+<p>Designed and built a quadrotor for autonomous flight. Implemented code for IMU, joystick control, PID control, and Vive sensor integration.</p>
+
+<h2 id="video-demo">Video Demo</h2>
+<iframe width="100%" height="50px" src="https://www.youtube.com/embed/4o0iD1JMODs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+
+<h2 id="inertial-measurement-unit-imu">Inertial Measurement Unit (IMU)</h2>
+<p>We get data from both the accelerometer and gyro in the IMU.</p>
+<ol>
+  <li>Calibrated all 3 gyro DOF to counter drift</li>
+  <li>Calibrated pitch and roll</li>
+  <li>Implemented complementary filter to high pass gyro output and low pass accelerometer output so that both the low noise of the gyro and the long term accuracy of the accelerometer can be utilized</li>
+</ol>
+
+<h2 id="safety-limits">Safety Limits</h2>
+<p>To prevent the quadrotor from undesired behaviors, we implemented a number of safety measures to stop the program:</p>
+<ol>
+  <li>Any gyro rate &gt;300 degrees/sec</li>
+  <li>Roll angle &gt;45 or &lt;-45</li>
+  <li>Pitch angle &gt;45 or &lt;-45</li>
+  <li>Keyboard timeout</li>
+</ol>
+
+<h2 id="p-controller">P Controller</h2>
+<p>To provide linear feedback, we implemented proportional controller following:</p>
+
+<p><code class="language-plaintext highlighter-rouge">Motor PWM = neutral_power +- pitch/roll/yaw_error * P_value</code></p>
+
+<h2 id="i-controller">I Controller</h2>
+<p>To counter constant offsets (power difference of motors, shifts in weight, etc.), we implemented integral controller following:</p>
+
+<p><code class="language-plaintext highlighter-rouge">I_term += error * I_gain for every time step</code></p>
+
+<h2 id="d-controller">D Controller</h2>
+<p>To maintain angular velocity, we implemented derivative controller following:</p>
+
+<p><code class="language-plaintext highlighter-rouge">Motor pulse width = neutral_power +- pitch/roll/yaw_velocity * D_value</code></p>
+
+<h2 id="joystick-control">Joystick Control</h2>
+<p>To incorporate manual control, we implemented support for joystick input that would do the following:</p>
+<ol>
+  <li>Changing roll/pitch angle</li>
+  <li>Increase/reduce thrust</li>
+  <li>Pause/unpause flight</li>
+  <li>Calibrate sensors</li>
+  <li>Kill program</li>
+  <li>Joystick heartbeat detection (for safety)</li>
+</ol>
+
+<h2 id="vive-lighthouse">Vive Lighthouse</h2>
+<p>To achieve autonomous flight, we need to know the pose of the quadrotor in 3D space. We added 4 sensors that would take in IR light transmitted from the <a href="https://www.vive.com/us/accessory/base-station/">Vive Lighthouse</a>, which provides 2 sweeps of planar light. We can then get the X, Y, Z, and theta position of the quadrotor for autonomous flight.</p>
+
+<h2 id="source-code">Source Code</h2>
+<p><a href="https://github.com/EricYYang2022/CS410-Quad04">Github repo</a></p>
+
+<h2 id="group-members">Group Members</h2>
+<p>Hang Yin, Eric Yang</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Quadrotor+Control%20http%3A%2F%2Flocalhost%3A4000%2Fportfolio%2Fquadrotor%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fportfolio%2Fquadrotor%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fportfolio%2Fquadrotor%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/portfolio/pen-challenge/" class="pagination--pager" title="Pen Recognition and Control
+">Previous</a>
+    
+    
+      <a href="/portfolio/rrt/" class="pagination--pager" title="RRT for path planning with obstacles
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/hang-yin" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Hang Yin. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

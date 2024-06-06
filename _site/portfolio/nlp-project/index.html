@@ -1,0 +1,476 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>ML: GCN for Sentiment Analysis - Hang Yin</title>
+<meta name="description" content="NLP, edge-conditioned GCN, Tensorflow">
+
+
+  <meta name="author" content="Hang Yin">
+  
+  <meta property="article:author" content="Hang Yin">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Hang Yin">
+<meta property="og:title" content="ML: GCN for Sentiment Analysis">
+<meta property="og:url" content="http://localhost:4000/portfolio/nlp-project/">
+
+
+  <meta property="og:description" content="NLP, edge-conditioned GCN, Tensorflow">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/nlp_pipeline.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2024-06-05T22:25:12-07:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/portfolio/nlp-project/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hang Yin Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hang Yin
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/">More about me</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://raw.githubusercontent.com/hang-yin/portfolio/gh-pages/assets/ZhianRuan_Robotics.pdf">Resume</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/bio-photo1.png" alt="Hang Yin" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Hang Yin</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>MS in Robotics @ Northwestern</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Evanston, IL</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/hang-yin" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="mailto:hangyin2023@u.northwestern.edu" rel="nofollow noopener noreferrer me"><i class="fa fa-fw fa-envelope" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/hangyin0226/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="ML: GCN for Sentiment Analysis">
+    <meta itemprop="description" content="NLP, edge-conditioned GCN, Tensorflow">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/portfolio/nlp-project/" class="u-url" itemprop="url">ML: GCN for Sentiment Analysis
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#purpose">Purpose</a></li><li><a href="#methods">Methods</a></li><li><a href="#results">Results</a></li><li><a href="#conclusion">Conclusion</a></li><li><a href="#link-to-paper">Link to paper</a></li><li><a href="#source-code">Source code</a></li><li><a href="#group-members">Group members</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        
+<p>This project explores combining dependency parsing with pre-trained language embedding models using edge-conditioned graph convolution networks.</p>
+
+<h2 id="purpose">Purpose</h2>
+<p>SOTA sentiment classification approaches rely on very large statistical language models that perform well but difficult to interpret. By training and representing language models as graphs with separable semantic and syntactical features, we can better understand how language models make decisions and build models that reflect human understanding of language.</p>
+
+<h2 id="methods">Methods</h2>
+<p>The theory of dependency grammar represents the syntactical structure of sentences as a directed graph where the nodes as words and the edges are relations between the words. See below for an example of a dependency graph:</p>
+
+<p><img src="http://localhost:4000/assets/images/dependency-parsing.jpg" alt="Dependency parsing" /></p>
+
+<p>Each edge describes how the target word, named the dependent, modifies the source word, named the head. By combining dependency trees and pre-trained language models, we can represent sentences as trees where the nodes are n-dimensional vector representations of words, and the edges are the dependency relations. By using Edge-Conditioned Graph Convolution Networks, we aim to combine the structural, syntactic, and semantic information from a sentence for the task of sentiment classification. See below for our model architecture:</p>
+
+<p><img src="http://localhost:4000/assets/images/nlp_pipeline.jpg" alt="Model architecture" /></p>
+
+<h2 id="results">Results</h2>
+<p>Edge-Conditioned GCN (87.36%) outperforms baselines on the IMDB binary classification task with significantly less trainable as well as fixed parameters. However, one-hot encoding of edge types is insufficient for learning or utilizing different types of depenendcy relations.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Trainable parameters</th>
+      <th>Total parameters</th>
+      <th>Accuracy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Feed Forward</td>
+      <td>8k</td>
+      <td>47M</td>
+      <td>76.30%</td>
+    </tr>
+    <tr>
+      <td>BiLSTM</td>
+      <td>300k</td>
+      <td>47M</td>
+      <td>84.73%</td>
+    </tr>
+    <tr>
+      <td>CNN</td>
+      <td>7.9M</td>
+      <td>55M</td>
+      <td>84.50%</td>
+    </tr>
+    <tr>
+      <td>GCN sentence-level</td>
+      <td>33k</td>
+      <td>47M</td>
+      <td>65.68%</td>
+    </tr>
+    <tr>
+      <td>GCN with dependency parsing</td>
+      <td>561</td>
+      <td>500k</td>
+      <td>85.32%</td>
+    </tr>
+    <tr>
+      <td>Edge-conditioned GCN with dependency parsing</td>
+      <td>20k</td>
+      <td>480k</td>
+      <td>87.36%</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>We demonstrated that it is possible to perform sentiment classification while integrating syntactical and semantic information in a graphical way. We also
+explored both a standard graph convolution layer and an edge-conditioned convolution layer that incorporates dependency relations as edge labels.</p>
+
+<h2 id="link-to-paper">Link to paper</h2>
+<p>Check out our paper <a href="https://raw.githubusercontent.com/hang-yin/portfolio/gh-pages/assets/nlp-paper.pdf">here</a>.</p>
+
+<h2 id="source-code">Source code</h2>
+<p><a href="https://github.com/xiaojoey/CS397Project">Github repo</a></p>
+
+<h2 id="group-members">Group members</h2>
+<p>Hang Yin, Joey Yang, Junhao Xu, Renzhi Hao</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=ML%3A+GCN+for+Sentiment+Analysis%20http%3A%2F%2Flocalhost%3A4000%2Fportfolio%2Fnlp-project%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fportfolio%2Fnlp-project%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fportfolio%2Fnlp-project%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/portfolio/manipulation/" class="pagination--pager" title="KUKA youBot Mobile Manipulation
+">Previous</a>
+    
+    
+      <a href="/portfolio/os-env/" class="pagination--pager" title="Web: Orchestration Scripting Environment
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/hang-yin" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Hang Yin. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
