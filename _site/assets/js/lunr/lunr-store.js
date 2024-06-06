@@ -101,6 +101,66 @@ var store = [{
         "url": "/portfolio/winter-project/",
         "teaser": "/assets/images/winter_gif.gif"
       },{
+        "title": "Dice in a Box by 2R Robot Simulation",
+        "excerpt":"This project is meant to turn a Franka Emika Panda arm into a Jenga assistant! It uses computer vision to detect Jenga bricks and place them on top of the tower. The robot plans and executes trajectories using a custom MoveGroup API. Video Demo Calibration Calibrating the robot relies on...","categories": [],
+        "tags": [],
+        "url": "/portfolio_control_sw/2R_dice/",
+        "teaser": "/assets/images/jenga.gif"
+      },{
+        "title": "Distributed Invariant UKF with CI under Lie Group",
+        "excerpt":"This project is meant to turn a Franka Emika Panda arm into a Jenga assistant! It uses computer vision to detect Jenga bricks and place them on top of the tower. The robot plans and executes trajectories using a custom MoveGroup API. Video Demo Calibration Calibrating the robot relies on...","categories": [],
+        "tags": [],
+        "url": "/portfolio_control_sw/IUKF/",
+        "teaser": "/assets/images/jenga.gif"
+      },{
+        "title": "Robot Jenga Assistant",
+        "excerpt":"This project is meant to turn a Franka Emika Panda arm into a Jenga assistant! It uses computer vision to detect Jenga bricks and place them on top of the tower. The robot plans and executes trajectories using a custom MoveGroup API. Video Demo Calibration Calibrating the robot relies on...","categories": [],
+        "tags": [],
+        "url": "/portfolio_control_sw/jenga/",
+        "teaser": "/assets/images/jenga.gif"
+      },{
+        "title": "KUKA youBot Mobile Manipulation",
+        "excerpt":"This project plans a trajectory for the end-effector of the youBot mobile manipulator (a mobile base with four mecanum wheels and a 5R robot arm), performs odometry as the chassis moves, and performs feedback control to drive the youBot to pick up a block at a specified location, carry it...","categories": [],
+        "tags": [],
+        "url": "/portfolio_control_sw/manipulation/",
+        "teaser": "/assets/images/449.gif"
+      },{
+        "title": "CVAE for Assistive Action Prediction",
+        "excerpt":"Video Demo Prior Work: Omnid Mocobots Part I: Migration from ROS1 Melodic to ROS2 IRON To take advantage of the new features ROS2 provide, we transitioned 14 ROS1 Melodic packages over to ROS2 Iron. Here are some of the key steps we took: Adapting Source Code: Updated the original code...","categories": [],
+        "tags": [],
+        "url": "/portfolio_control_sw/omnids/",
+        "teaser": "/assets/images/omnids.gif"
+      },{
+        "title": "ChatGPT-powered Robot Chef",
+        "excerpt":"This project is a system that enables voice-controlled, robot-assisted cooking. The system utilizes a custom Alexa skill to process user voice commands and a Flask app to generate recipe steps through ChatGPT. Object detection using a RealSense camera and the CLIP model allows the system to recognize objects in the...","categories": [],
+        "tags": [],
+        "url": "/portfolio_control_sw/winter-project/",
+        "teaser": "/assets/images/winter_gif.gif"
+      },{
+        "title": "Dice in a Cup Simulation from Scratch",
+        "excerpt":"This project simulates a dice colliding in a spinning cup by modeling the Lagrangian dynamics in this 6 DoF system. Video Demo Euler Lagrange Equations The Euler Lagrange equations are derived by finding the body velocities of the box and the dice, defining the inertial matrices, calculating the kinetic energy...","categories": [],
+        "tags": [],
+        "url": "/portfolio_hardware/dice-cup/",
+        "teaser": "/assets/images/314.gif"
+      },{
+        "title": "IMU Controlled Robot Arm",
+        "excerpt":"This project is one-half of the IMUGripulator, a gesture/EMG-controlled 2-DOF robotic arm and gripper. The robot was created as a collaboration between two teams for the final project of Northwestern University’s CE 346 Microprocessor System Design course. Each team used a micro:bit v2 with a Nordic nRF52833 SoC to create...","categories": [],
+        "tags": [],
+        "url": "/portfolio_hardware/imu-emg/",
+        "teaser": "/assets/images/imu-emg.jpg"
+      },{
+        "title": "Mario Motorcycle",
+        "excerpt":"Inspired by Mario’s motorcycle style from the beloved Mario Kart game, I took on the task of designing, building, and programming a line-following motorcycle of my own. The project made use of a Raspberry Pi Pico W to interpret images captured by a camera and identify the center of a...","categories": [],
+        "tags": [],
+        "url": "/portfolio_hardware/mario/",
+        "teaser": "/assets/images/mario-luigi.png"
+      },{
+        "title": "Quadrotor Control",
+        "excerpt":"Designed and built a quadrotor for autonomous flight. Implemented code for IMU, joystick control, PID control, and Vive sensor integration. Video Demo Inertial Measurement Unit (IMU) We get data from both the accelerometer and gyro in the IMU. Calibrated all 3 gyro DOF to counter drift Calibrated pitch and roll...","categories": [],
+        "tags": [],
+        "url": "/portfolio_hardware/quadrotor/",
+        "teaser": "/assets/images/quadrotor.jpg"
+      },{
         "title": "iExpressionNet",
         "excerpt":"This project focuses on exploring deep learning to detect facial expressions and fine-tuning the model with specific user dataset. Video Demo Introduction The proposed project will focus on utilizing deep learning to detect facial expressions in humans. While there have been many projects in the past that dealt with expression...","categories": [],
         "tags": [],

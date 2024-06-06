@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>RRT for path planning with obstacles - Zhian (Aria) Ruan</title>
-<meta name="description" content="Path planning, Python">
+<!-- begin _includes/seo.html --><title>IMU Controlled Robot Arm - Zhian (Aria) Ruan</title>
+<meta name="description" content="C, Embedded System, IMU, EMG">
 
 
   <meta name="author" content="Zhian (Aria) Ruan">
@@ -22,15 +22,15 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Zhian (Aria) Ruan">
-<meta property="og:title" content="RRT for path planning with obstacles">
-<meta property="og:url" content="http://localhost:4000/portfolio/rrt/">
+<meta property="og:title" content="IMU Controlled Robot Arm">
+<meta property="og:url" content="http://localhost:4000/portfolio_hardware/imu-emg/">
 
 
-  <meta property="og:description" content="Path planning, Python">
+  <meta property="og:description" content="C, Embedded System, IMU, EMG">
 
 
 
-  <meta property="og:image" content="http://localhost:4000/assets/images/RRT_arbitrary_obstacle.jpg">
+  <meta property="og:image" content="http://localhost:4000/assets/images/imu-emg.jpg">
 
 
 
@@ -43,7 +43,7 @@
 
 
 
-<link rel="canonical" href="http://localhost:4000/portfolio/rrt/">
+<link rel="canonical" href="http://localhost:4000/portfolio_hardware/imu-emg/">
 
 
 
@@ -94,7 +94,7 @@
 
   </head>
 
-  <body class="layout--single">
+  <body class="layout--single wide">
     <nav class="skip-links">
   <ul>
     <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
@@ -261,8 +261,8 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="RRT for path planning with obstacles">
-    <meta itemprop="description" content="Path planning, Python">
+    <meta itemprop="headline" content="IMU Controlled Robot Arm">
+    <meta itemprop="description" content="C, Embedded System, IMU, EMG">
     
     
 
@@ -270,7 +270,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/portfolio/rrt/" class="u-url" itemprop="url">RRT for path planning with obstacles
+            <a href="http://localhost:4000/portfolio_hardware/imu-emg/" class="u-url" itemprop="url">IMU Controlled Robot Arm
 </a>
           </h1>
           
@@ -281,28 +281,46 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>Implementation of Rapidly-Exploring Random Tree (RRT), a path planning algorithm developed by Steven LaValle (see reference).</p>
+        
+<p>This project is one-half of the <strong>IMUGripulator</strong>, a gesture/EMG-controlled 2-DOF robotic arm and gripper. The robot was created as a collaboration between two teams for the final project of Northwestern University’s CE 346 Microprocessor System Design course. Each team used a <a href="https://tech.microbit.org/hardware/2-0-revision/">micro:bit v2</a> with a <a href="https://www.nordicsemi.com/Products/nRF52833">Nordic nRF52833 SoC</a> to create an application in C to control their portion of the robot.</p>
 
-<h2 id="part-1-simple-rrt">Part 1: Simple RRT</h2>
-<p>The first task involves generating an RRT in a 2D domain given an initial configuration. See an example run below:</p>
+<p>The <strong>IMUnipulator</strong> team used a 9-DOF IMU to control two servos that actuated the joints of the robotic arm. The code for this application is in this <a href="https://github.com/hang-yin/IMUnipulator">repository</a>.</p>
 
-<p><img src="https://user-images.githubusercontent.com/60046203/190181511-b4fe9eed-2355-42eb-8e30-6166d1c58de9.png" alt="simpleRRT" /></p>
+<p>The <strong>EMGripper</strong> team used an EMG sensor and a force sensitive resistor to control a servo that actuated the arm’s end-effector gripper. Their code can be found in a <a href="https://github.com/katie-hughes/emgripper">separate repository</a>.</p>
 
-<h2 id="part-2-rrt-with-circular-obstacles">Part 2: RRT with circular obstacles</h2>
-<p>The second task involves generating a set of random circular obstacles and using RRT to find a path between a start and goal location. See an example run below:</p>
+<h2 id="video-demo">Video Demo</h2>
+<iframe width="100%" height="50px" src="https://www.youtube.com/embed/lZlIVSBJQCs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
 
-<p><img src="https://user-images.githubusercontent.com/60046203/190182319-b4712865-0567-47c0-b752-3326c72a8259.png" alt="RRT_path_planning_with_obstacle" /></p>
+<h2 id="sensors">Sensors</h2>
+<ul>
+  <li><a href="https://learn.adafruit.com/adafruit-tdk-invensense-icm-20948-9-dof-imu">Adafruit TDK InvenSense ICM-20948 9-DOF IMU</a> - provided pitch and roll signals from the accelerometer to control the arm joints.</li>
+  <li><a href="https://www.sparkfun.com/products/14520">SparkFun AT42QT1011 Capacitive Touch Breakout</a> (x2) - buttons for resetting the arm to home position and controlling an electromagnet end-effector.</li>
+  <li>Built-in micro:bit Capacitive Touch Sensor - used to adjust the sensitivity level (speed) at which the arm’s joints moved in response to control signals from the IMU.</li>
+</ul>
 
-<h2 id="part-3-rrt-with-arbitrary-obstacles">Part 3: RRT with arbitrary obstacles</h2>
-<p>The third task involves reading an arbitrary obstacle from an image and using RRT to find a path between a start and goal location. See an example run below using the Northwestern “N” obstacle:</p>
+<h2 id="actuators">Actuators</h2>
+<ul>
+  <li>MG996R and DS3218 servos - used to move the arm joints in response to the IMU signals.</li>
+  <li><a href="https://www.adafruit.com/product/815">Adafruit PCA9685 I2C 16-Channel 12-bit PWM Driver</a> - used as an I2C interface to send PWM signals to the servos.</li>
+  <li><a href="https://www.adafruit.com/product/3872">Adafruit 5V Electromagnet</a> - an optional end-effector for the arm to pick up metallic objects.</li>
+  <li>Built-in micro:bit LED Matrix - used to indicate the currently active sensitivity level (speed) for arm motion</li>
+</ul>
 
-<p><img src="https://user-images.githubusercontent.com/60046203/190182778-bfc296f8-f000-495b-b796-5c456d697e9a.png" alt="RRT_arbitrary_obstacle_gray" /></p>
+<h2 id="control-overview">Control Overview</h2>
+<p>The micro:bit collects roll and pitch data via I2C from the IMU’s accelerometer and converts the data into degrees of tilt in each axis. If either axis indicates a tilt that is higher than a certain threshold, the corresponding servo will be commanded to move. The roll axis controls the lower joint of the arm, called the “base” joint. The pitch axis controls the upper joint of the arm, called the “arm” joint. To simplify user experience, only one axis can move at a time, and the arm joint is prioritized over the base joint.</p>
 
-<h2 id="reference">Reference</h2>
-<p><a href="http://msl.cs.illinois.edu/~lavalle/papers/Lav98c.pdf">http://msl.cs.illinois.edu/~lavalle/papers/Lav98c.pdf</a></p>
+<p>The servos are controlled via PWM duty cycles, each one indicating a different position to which the servo should move. The micro:bit sends data over I2C to set the value of that duty cycle to the PCA9685, which in turn produces a PWM signal with that duty cycle. Each servo has a mechanical limit of 180 degrees of rotation, though the arm joint is limited in software to less than that.</p>
+
+<p>While the IMU axis remains tilted beyond its threshold, the servo commanded position is incremented/decremented at a certain rate. This rate can be controlled by the “sensitivity” level of the arm, which is adjusted via the micro:bit’s built-in capacitive touch sensor and indicated by the built-in LED matrix.</p>
+
+<p>Finally, the arm can be returned to its default “home” position via a touch of an external capacitive touch sensor.</p>
 
 <h2 id="source-code">Source code</h2>
-<p><a href="https://github.com/hang-yin/Rapidly-Exploring_Random_Tree">Github repo</a></p>
+<p><a href="https://github.com/hang-yin/IMUnipulator">Github repo</a></p>
+
+<h2 id="group-members">Group members</h2>
+<p>Hang Yin, Nick Morales, Felipe Jannarone</p>
 
         
       </section>
@@ -319,22 +337,22 @@
       <section class="page__share">
   
 
-  <a href="https://twitter.com/intent/tweet?text=RRT+for+path+planning+with+obstacles%20http%3A%2F%2Flocalhost%3A4000%2Fportfolio%2Frrt%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=IMU+Controlled+Robot+Arm%20http%3A%2F%2Flocalhost%3A4000%2Fportfolio_hardware%2Fimu-emg%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fportfolio%2Frrt%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fportfolio_hardware%2Fimu-emg%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fportfolio%2Frrt%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fportfolio_hardware%2Fimu-emg%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/portfolio/quadrotor/" class="pagination--pager" title="Quadrotor Control
+      <a href="/portfolio_hardware/dice-cup/" class="pagination--pager" title="Dice in a Cup Simulation from Scratch
 ">Previous</a>
     
     
-      <a href="/portfolio/slam/" class="pagination--pager" title="Feature-based EKF-SLAM from Scratch
+      <a href="/portfolio_hardware/mario/" class="pagination--pager" title="Mario Motorcycle
 ">Next</a>
     
   </nav>

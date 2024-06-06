@@ -1,0 +1,539 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>CVAE for Assistive Action Prediction - Zhian (Aria) Ruan</title>
+<meta name="description" content="Imitation Learning, data infrastructure, ROS2 Control">
+
+
+  <meta name="author" content="Zhian (Aria) Ruan">
+  
+  <meta property="article:author" content="Zhian (Aria) Ruan">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Zhian (Aria) Ruan">
+<meta property="og:title" content="CVAE for Assistive Action Prediction">
+<meta property="og:url" content="http://localhost:4000/portfolio_control_sw/omnids/">
+
+
+  <meta property="og:description" content="Imitation Learning, data infrastructure, ROS2 Control">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/omnids.gif">
+
+
+
+
+
+  <meta property="article:published_time" content="2024-06-05T22:31:16-07:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/portfolio_control_sw/omnids/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Zhian (Aria) Ruan Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Zhian (Aria) Ruan
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/">More about me</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://raw.githubusercontent.com/hang-yin/portfolio/gh-pages/assets/ZhianRuan_Robotics.pdf">Resume</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/bio-photo1.png" alt="Zhian (Aria) Ruan" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Zhian (Aria) Ruan</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>MS in Robotics @ Northwestern</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Evanston, IL</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/hang-yin" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="mailto:hangyin2023@u.northwestern.edu" rel="nofollow noopener noreferrer me"><i class="fa fa-fw fa-envelope" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/hangyin0226/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="CVAE for Assistive Action Prediction">
+    <meta itemprop="description" content="Imitation Learning, data infrastructure, ROS2 Control">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/portfolio_control_sw/omnids/" class="u-url" itemprop="url">CVAE for Assistive Action Prediction
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h2 id="video-demo">Video Demo</h2>
+<iframe width="100%" height="50px" src="https://www.youtube.com/embed/WBKrdH3KBAc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+
+<h2 id="prior-work-omnid-mocobots">Prior Work: Omnid Mocobots</h2>
+<iframe width="100%" height="50px" src="https://www.youtube.com/embed/SEuFfONryL0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+
+<h2 id="part-i-migration-from-ros1-melodic-to-ros2-iron">Part I: Migration from ROS1 Melodic to ROS2 IRON</h2>
+
+<p>To take advantage of the new features ROS2 provide, we transitioned 14 ROS1 Melodic packages over to ROS2 Iron. Here are some of the key steps we took:</p>
+
+<ul>
+  <li>Adapting Source Code: Updated the original code to incorporate ROS2-specific libraries like rclcpp.</li>
+  <li>Build System Modification: Adjusted packages to ensure compatibility with the ROS2 build system and its accompanying tools.</li>
+  <li>Updating Definitions: Updated message, service, and action definitions to be in line with ROS2 requirements.</li>
+  <li>Parameter Definition Updates: We made changes based on the structural shift from ROS 1 to ROS 2. While ROS 1 parameters are tied to a central server facilitating runtime retrieval via network APIs, ROS 2 places parameters on a per-node basis, making them adjustable in real-time through ROS services.</li>
+  <li>Docker Environment: Set up a Docker environment integrated with Ubuntu 22.04 and ROS2, allowing for hardware testing.</li>
+  <li>Unit Test Compatibility: Revised unit tests for ROS2 compatibility. Notably, my partner <a href="https://ngmor.github.io/">Nick</a> did exemplary work in this area – you can view the specifics of our approach with the catch2 testing framework for ROS2 <a href="https://github.com/ngmor/catch_ros2">here</a>.</li>
+  <li>Remote Launch: This is an innovative ROS2 package that empowers users to remotely initiate nodes and launch files via SSH. You can view the work done by my partner <a href="https://ngmor.github.io/">Nick</a> on this <a href="https://github.com/NU-MSR/launch_remote">here</a>.</li>
+</ul>
+
+<h2 id="part-ii-integrating-ros2_control-into-omnid">Part II: Integrating ros2_control into Omnid</h2>
+<p>The motivation behind our venture into ros2_control integration can be distilled into two reasons:</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Modularity</code> with ros2_control:
+ros2_control lets users deconstruct robotic systems into more straightforward, swappable components. Termed as “hardware interfaces,” these components provide a plug-and-play capability. This becomes particularly useful when there’s a need to substitute a specific hardware module or modify a control algorithm without overhauling the entire system.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Dynamic Reconfigurability</code>:
+The framework offers an array of tools that facilitate the dynamic loading, unloading, initiation, and cessation of controllers during runtime. Such dynamic adaptability proves invaluable during developmental phases, offering rapid iterations, and operational stages, adjusting to evolving conditions or tasks.</p>
+  </li>
+</ul>
+
+<p>However, integrating ros2_control posed a significant challenge. Our existing system had abstracted the chassis control down to its embedded microcontroller. While our microcontroller responded directly to a twist command, ros2_control mandates direct hardware access to each motor’s position, velocity, and effort control. Our workaround was to conceptualize the entire base as a singular joint, manipulated via three velocity interfaces: twist linear x, twist linear y, and twist angular z. Here’s a diagram of our ros2_control architecture:</p>
+
+<p><img src="http://localhost:4000/assets/images/omnid_ros2_control.png" alt="ros2-control-architecture" /></p>
+
+<h2 id="part-iii-data-infrastructure-for-machine-learning-on-omnid">Part III: Data Infrastructure for Machine Learning on Omnid</h2>
+
+<h3 id="setup">Setup</h3>
+
+<p>For our task, we added a rigid <code class="language-plaintext highlighter-rouge">leash</code> to the end effector of the original omnid robot, so that we can maintain a safe distance from the robot when collecting data. To ensure that the robot’s end effector is in the same position at the start of each data collection, we also created a <code class="language-plaintext highlighter-rouge">rack</code> to place the leash. In our task space, we placed five goal locations marked with color tape. In the image below, we can see there are five goals in blue, orange, yellow, purple, and green, each with a unique orientation and location.</p>
+
+<p><img src="http://localhost:4000/assets/images/omnid_setup.png" alt="omnid-setup" /></p>
+
+<p>Our data collection includes not only the robot’s own data, such as <code class="language-plaintext highlighter-rouge">commanded velocity</code> and <code class="language-plaintext highlighter-rouge">joint states</code>, but we also placed two external cameras: one <code class="language-plaintext highlighter-rouge">overhead camera</code> fixed to the ceiling and one <code class="language-plaintext highlighter-rouge">horizontal camera</code> fixed on a table next to the task space. Additionally, we equipped the robot with an <code class="language-plaintext highlighter-rouge">onboard camera</code> facing the direction of the human operator. All three cameras are <code class="language-plaintext highlighter-rouge">RealSense D435</code>, but we only used their color stream. The point is that if in the future someone wants to generalize or replicate our approach, it’s not necessarily required to use depth cameras. Ideally, even low-cost webcams could be used. In our data collection, we require the human operator to move the robot from the start location to one of the goal locations. The gif below (generated with <a href="https://foxglove.dev">Foxglove</a>) shows one demo run with video streams from the three cameras described above and the force magnitude on the end effector over time.</p>
+
+<p><img src="http://localhost:4000/assets/images/omnid_demo_run.gif" alt="omnid-demo-run" style="width: 100%;" /></p>
+
+<h3 id="data-collection">Data Collection</h3>
+
+<p>For data collection, we used ROS bags to record the necessary data. Due to the limited data transfer speed over the wifi network, which couldn’t meet our required rate, we recorded simultaneously on both the station (the computer running the ROS launch file) and the omnid robot during each recording session. Afterwards, we merged the data from both sources. On the station, we recorded data from the two external cameras and AprilTag, while on the omnid, we recorded from the onboard camera and the robot’s own data. To accelerate our data collection process, we developed a ROS2 package named <a href="https://github.com/omnid/omnid_ml/tree/main/omnid_data_collection">omnid_data_collection</a>. This package can launch all the necessary nodes, record based on the topic names we specify, and includes a bash script that simplifies user interaction with the entire process to a series of ‘enter’ commands. The package’s launch file utilizes Nick’s <a href="https://github.com/NU-MSR/launch_remote">launch_remote_ssh</a> package to simultaneously launch nodes on both the station and the omnid. Thanks to this series of process optimizations, we managed to reduce the time to record each demo to about 40 seconds.</p>
+
+<p><img src="http://localhost:4000/assets/images/omnid_data_collection.png" alt="data-collection" /></p>
+
+<h3 id="visualization">Visualization</h3>
+
+<p>To ensure that we can easily understand what happens in each run, we also wrote some visualization utilities in the <a href="https://github.com/omnid/omnid_ml/tree/main/omnid_data_collection">omnid_data_collection</a> package. For example, the following is a visualization of AprilTag tracking. We calculate the trajectory traversed by the omnid by computing the difference between the world frame AprilTag and the base frame AprilTag tracking.</p>
+
+<p><img src="http://localhost:4000/assets/images/omnid_apriltag.png" alt="apriltag-visualization" /></p>
+
+<p>Besides caring about the path of the omnid, we are also interested in the net force magnitude over time on the x and y directions (planar) on the end effector. Therefore, as shown in the image below, we have a plotting utility that compares the force magnitude.</p>
+
+<p><img src="http://localhost:4000/assets/images/omnid_force_visualization.png" alt="force-visualization" /></p>
+
+<h2 id="part-iv-imitation-learning-for-assistive-action-prediction">Part IV: Imitation Learning for Assistive Action Prediction</h2>
+
+<p>Prior work on the omnids has empowered humans to collaborate seamlessly with robots, enabling effortless manipulation of sizable and weighty payloads through gravity compensation and passive compliance. Building on this, our current project aims to further simplify this co-manipulation process by “inferring” human intent. To do this, we’ve adopted two State-of-the-Art robot learning approaches:</p>
+<ul>
+  <li><a href="https://arxiv.org/abs/2304.13705">Action Chunking with Transformers</a></li>
+  <li><a href="https://diffusion-policy.cs.columbia.edu/">Diffusion Policy</a></li>
+</ul>
+
+<p>The objective is for the robot to autonomously apply supplementary forces on the end effectors, allowing humans to exert less effort. While my partner Nick works with the Diffusion Policy, I’ve been working on the Action Chunking with Transformers approach. To understand how the Action Chunking with Transformers approach works, we first need to understand the Conditional Variational Autoencoder (CVAE).</p>
+
+<h3 id="conditional-variational-autoencoder-cvae">Conditional Variational Autoencoder (CVAE)</h3>
+
+<p>A simpler version of CVAE, Variational Autoencoder (VAE), is a type of generative model that encodes data into a probabilistic latent space representation and then decodes it back to the original space. It uses an encoder to map input data to a probability distribution in latent space and a decoder to reconstruct data from this space. A Conditional Variational Autoencoder (CVAE) extends this concept by conditioning the latent space representation on additional information, like labels. This conditioning allows CVAEs to generate data specific to given conditions, enhancing the control over the generation process.</p>
+
+<p><img src="http://localhost:4000/assets/images/omnid_generic_cvae.png" alt="generic-cvae" /></p>
+
+<h3 id="action-chunking-with-transformers">Action Chunking with Transformers</h3>
+
+<p>In the implementation of the CVAE architecture within the ALOHA work, it also incorporates an encoder and a decoder. The encoder here is a BERT-like transformer encoder, with inputs being 1) current robot states, 2) k (chunk size) action sequence of the demonstration, and 3) a learned [CLS] token similar to BERT. After passing through the encoder, only the token corresponding to [CLS] is retained to predict the mean and variance of the “style variable” z, which is then used as input to the decoder.</p>
+
+<p>The decoder in this architecture takes 1) camera data, 2) current robot states, and 3) the style variable z to output the next k actions. ResNet serves as the backbone CNN for processing images from the camera. Within this CVAE decoder, there is also an encoder and a decoder, both implemented using transformers. In simple terms, the transformer encoder synthesizes information from different camera viewpoints, the robot states, and the style variable, while the transformer decoder generates a coherent action sequence. After processing image data with ResNet, to retain spatial information, a 2D sinusoidal position embedding is added to the feature sequence. The transformer decoder conditions on the encoder output through cross-attention, where the input sequence is a fixed position embedding. A notable aspect of this work is the use of L1 loss for reconstruction instead of the more common L2 loss, as L1 loss leads to more precise modeling of the action sequence.</p>
+
+<p>During training, both the encoder and decoder are utilized, but during evaluation, we discard the encoder and solely use the decoder to output the action sequence.</p>
+
+<p>Specifically for our task, we collected 50 demonstrations for each goal location, giving us 250 demonstrations in total.</p>
+
+<p>Below is an architecture diagram illustrating the adapted Action Chunking with Transformers policy, inspired by the ALOHA paper:</p>
+
+<p><img src="http://localhost:4000/assets/images/omnid_aloha_cvae.png" alt="adapted-aloha-cvae" /></p>
+
+<p>One unique feature of this work is named action chunking with temporal ensemble. To address the errors in imitation learning and efficiently implement pixel-to-action policies, action chunking (inspired by neuroscience) is adopted, where actions are grouped and executed in units (chunks). This reduces the effective horizon of tasks and allows the model to handle non-Markovian behaviors in human demonstrations. To enhance smoothness and avoid jerky motions, action chunks are overlapped by querying the policy at every timestep and using a temporal ensemble method, which averages predictions with exponential weighting. This approach results in precise and smooth predicted motion without additional training costs, only increasing inference-time computation.</p>
+
+<p><img src="http://localhost:4000/assets/images/omnid_action_chunking.png" alt="action-chunking" /></p>
+
+<h3 id="control-modes">Control Modes</h3>
+
+<p>To implement this architecture with the Omnids, we’ve developed two control modes: 1. Predicting additional forces to be applied on the end effector and apply that amount of force. 2. Predicting the end effector’s position and actively moving towards that position. Below are the diagrams for our two control modes, with the left being force control and the right being position control:</p>
+
+<p><img src="http://localhost:4000/assets/images/omnid_control_mode.png" alt="control-modes" /></p>
+
+<h3 id="evaluation">Evaluation</h3>
+
+<p>To evaluate whether our approach makes it easier for the human operator to complete co-manipulation with the Omnids, we designed a task called the Gauntlet Game, where we lead the omnid through five target locations and record the completion time. At each target, we need to ensure the omnid is within a certain distance threshold and stays there for a set amount of time. This is achieved through visual feedback monitored by AprilTag tracking on the side. We came up with two metrics to measure our approach: the average time to complete the Gauntlet Game, and the average force magnitude. The image below shows the tracking trajectory of one such Gauntlet evaluation, provided by AprilTag.</p>
+
+<p><img src="http://localhost:4000/assets/images/omnid_gautlet.png" alt="gautlet_evaluation" /></p>
+
+<h3 id="results">Results</h3>
+
+<p>The image below contains the evaluation results of the baseline, CVAE, and Diffusion Policy using the gauntlet game, with the left side showing completion time and the right side showing average force. Each type of model has many different configurations, and the specifications for each configuration is provided below the image.</p>
+
+<p><img src="http://localhost:4000/assets/images/omnid_result.png" alt="result" /></p>
+
+<ol>
+  <li>NONE - None</li>
+  <li>CVAE - action chunk size = 10</li>
+  <li>CVAE - action chunk size = 5</li>
+  <li>CVAE - action chunk size = 20</li>
+  <li>DIFFUSION - image, ee_gimbal, cmdvel, Tp16, To2, Ta8, K16</li>
+  <li>DIFFUSION - lowdim, ee_gimbal, cmdvel, Tp128, To32, Ta32, DDIM, K16</li>
+  <li>DIFFUSION - lowdim, ee_gimbal, Tp128, To32, Ta32, DDIM, K16</li>
+  <li>DIFFUSION - image, ee_gimbal, Tp16, To2, Ta8, K16, RES</li>
+  <li>DIFFUSION - image, ee_gimbal, Tp16, To2, Ta8, K16</li>
+  <li>DIFFUSION - image, ee_gimbal, cmdvel, Tp16, To2, Ta8, K16, RES</li>
+</ol>
+
+<p>Looking at these plots, there is a slight improvement in the completion time for the gauntlet game. We can observe that some CVAE and diffusion policy models achieved a lower median completion time compared to the baseline. However, the average force exerted by nearly all models was significantly higher than the baseline. We believe this result is reasonable, as if our model exerts the predicted force on the end effector and the human operator continues to add force, the total force should indeed be higher than the baseline. This is further supported by the fact that there’s an improvement in time since a higher total effective force should lead to faster completion of the gauntlet task.</p>
+
+<h3 id="future-work">Future Work</h3>
+
+<p>One thing that we began to experiment with but didn’t have the time to test in-depth is the idea that if we train our policy to learn multiple goals, just like what we are doing now, the policy is learning multiple tasks and might not always make effective predictions at some arbitrary locations. Therefore, we tried training our policy on a single target location and obtained promising results, where we observed significantly shorter completion times with our models than using the baseline. Additionally, we considered that instead of indirectly controlling the motion of the omnid, we could try directly replacing the PID controller in the original system, which centers the delta arm end effector on the chassis. Eventually, if these models show promising results in simpler single robot tasks, we could attempt to generalize these approaches to a swarm of three omnids to perform assembly tasks.</p>
+
+<h2 id="group-members">Group Members</h2>
+<p>Hang Yin, <a href="https://ngmor.github.io/">Nick Morales</a>, advised by <a href="https://robotics.northwestern.edu/people/profiles/faculty/elwin-matt.html">Prof. Matthew Elwin</a></p>
+
+<h2 id="source-code">Source Code</h2>
+<p><a href="https://github.com/omnid/omnid_ml">Github repo</a></p>
+
+<h2 id="reference">Reference</h2>
+<ul>
+  <li>Elwin, M. L., Strong, B., Freeman, R. A., &amp; Lynch, K. M. (2023). Human-multirobot collaborative mobile manipulation: The Omnid Mocobots. IEEE Robotics and Automation Letters, 8(1), 376–383. <a href="https://doi.org/10.1109/lra.2022.3226366">https://doi.org/10.1109/lra.2022.3226366</a></li>
+  <li>Zhao, T. Z., Kumar, V., Levine, S., &amp; Finn, C. (2023). Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware. arXiv preprint arXiv:2304.13705. <a href="https://doi.org/10.48550/arXiv.2304.13705">https://doi.org/10.48550/arXiv.2304.13705</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=CVAE+for+Assistive+Action+Prediction%20http%3A%2F%2Flocalhost%3A4000%2Fportfolio_control_sw%2Fomnids%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fportfolio_control_sw%2Fomnids%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fportfolio_control_sw%2Fomnids%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/portfolio_control_sw/manipulation/" class="pagination--pager" title="KUKA youBot Mobile Manipulation
+">Previous</a>
+    
+    
+      <a href="/portfolio_control_sw/winter-project/" class="pagination--pager" title="ChatGPT-powered Robot Chef
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/hang-yin" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Zhian (Aria) Ruan. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

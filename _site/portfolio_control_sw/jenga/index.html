@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>RRT for path planning with obstacles - Zhian (Aria) Ruan</title>
-<meta name="description" content="Path planning, Python">
+<!-- begin _includes/seo.html --><title>Robot Jenga Assistant - Zhian (Aria) Ruan</title>
+<meta name="description" content="ROS2, MoveIt, OpenCV, Machine Learning">
 
 
   <meta name="author" content="Zhian (Aria) Ruan">
@@ -22,15 +22,15 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Zhian (Aria) Ruan">
-<meta property="og:title" content="RRT for path planning with obstacles">
-<meta property="og:url" content="http://localhost:4000/portfolio/rrt/">
+<meta property="og:title" content="Robot Jenga Assistant">
+<meta property="og:url" content="http://localhost:4000/portfolio_control_sw/jenga/">
 
 
-  <meta property="og:description" content="Path planning, Python">
+  <meta property="og:description" content="ROS2, MoveIt, OpenCV, Machine Learning">
 
 
 
-  <meta property="og:image" content="http://localhost:4000/assets/images/RRT_arbitrary_obstacle.jpg">
+  <meta property="og:image" content="http://localhost:4000/assets/images/jenga.gif">
 
 
 
@@ -43,7 +43,7 @@
 
 
 
-<link rel="canonical" href="http://localhost:4000/portfolio/rrt/">
+<link rel="canonical" href="http://localhost:4000/portfolio_control_sw/jenga/">
 
 
 
@@ -94,7 +94,7 @@
 
   </head>
 
-  <body class="layout--single">
+  <body class="layout--single wide">
     <nav class="skip-links">
   <ul>
     <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
@@ -261,8 +261,8 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="RRT for path planning with obstacles">
-    <meta itemprop="description" content="Path planning, Python">
+    <meta itemprop="headline" content="Robot Jenga Assistant">
+    <meta itemprop="description" content="ROS2, MoveIt, OpenCV, Machine Learning">
     
     
 
@@ -270,7 +270,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/portfolio/rrt/" class="u-url" itemprop="url">RRT for path planning with obstacles
+            <a href="http://localhost:4000/portfolio_control_sw/jenga/" class="u-url" itemprop="url">Robot Jenga Assistant
 </a>
           </h1>
           
@@ -281,28 +281,104 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>Implementation of Rapidly-Exploring Random Tree (RRT), a path planning algorithm developed by Steven LaValle (see reference).</p>
+        
+<p>This project is meant to turn a Franka Emika Panda arm into a Jenga assistant! It uses computer vision to detect Jenga bricks and place them on top of the tower. The robot plans and executes trajectories using a custom MoveGroup API.</p>
 
-<h2 id="part-1-simple-rrt">Part 1: Simple RRT</h2>
-<p>The first task involves generating an RRT in a 2D domain given an initial configuration. See an example run below:</p>
+<h2 id="video-demo">Video Demo</h2>
+<iframe width="100%" height="50px" src="https://www.youtube.com/embed/aCotjAaHfwM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
 
-<p><img src="https://user-images.githubusercontent.com/60046203/190181511-b4fe9eed-2355-42eb-8e30-6166d1c58de9.png" alt="simpleRRT" /></p>
+<h2 id="calibration">Calibration</h2>
 
-<h2 id="part-2-rrt-with-circular-obstacles">Part 2: RRT with circular obstacles</h2>
-<p>The second task involves generating a set of random circular obstacles and using RRT to find a path between a start and goal location. See an example run below:</p>
+<ul>
+  <li>Calibrating the robot relies on adding frames to the tf tree based on known geometry.</li>
+  <li>The robot is sent to a calibration position, then given an april tag that aligns with the gripper frame.</li>
+  <li>Once the camera can see the tag, it creates series of transforms from the camera to the tag and finally to the base of the robot.</li>
+  <li>Calibration pose:</li>
+</ul>
 
-<p><img src="https://user-images.githubusercontent.com/60046203/190182319-b4712865-0567-47c0-b752-3326c72a8259.png" alt="RRT_path_planning_with_obstacle" /></p>
+<p><img src="http://localhost:4000/assets/images/jenga-calibration.png" alt="Calibration Pose" /></p>
 
-<h2 id="part-3-rrt-with-arbitrary-obstacles">Part 3: RRT with arbitrary obstacles</h2>
-<p>The third task involves reading an arbitrary obstacle from an image and using RRT to find a path between a start and goal location. See an example run below using the Northwestern “N” obstacle:</p>
+<h2 id="tower-detection">Tower Detection</h2>
 
-<p><img src="https://user-images.githubusercontent.com/60046203/190182778-bfc296f8-f000-495b-b796-5c456d697e9a.png" alt="RRT_arbitrary_obstacle_gray" /></p>
+<ul>
+  <li>We detect the tower using the depth image from an Intel Realsense camera.</li>
+  <li>Once the top of the tower and the table are found by generating contours on the depth image, we repeatedly scan between these locations looking for partially removed pieces.</li>
+  <li>The starting orientation of the tower is determined through line detection in OpenCV.</li>
+</ul>
 
-<h2 id="reference">Reference</h2>
-<p><a href="http://msl.cs.illinois.edu/~lavalle/papers/Lav98c.pdf">http://msl.cs.illinois.edu/~lavalle/papers/Lav98c.pdf</a></p>
+<p><img src="http://localhost:4000/assets/images/jenga-tower-detection.png" alt="Tower Detection" /></p>
+
+<h2 id="machine-learning-for-hand-detection">Machine Learning for Hand Detection</h2>
+
+<ul>
+  <li>Overview:
+    <ul>
+      <li>We performed transfer learning on a deep neural network to help us detect whether there are hands in the scene so that the robot knows when it should look for a Jenga brick.</li>
+    </ul>
+  </li>
+  <li>Dataset:
+    <ul>
+      <li>Video samples of the Jenga tower were taken and separated into two classes: with hand(s) and without hand(s) around.</li>
+      <li>1000 images were extracted from each class.</li>
+    </ul>
+  </li>
+  <li>Model:
+    <ul>
+      <li>We performed transfer learning on a pretrained neural network - MobileNets</li>
+      <li>The MobileNet we are using implements depth-wise separable convolutions to build light weight deep neural networks</li>
+      <li>We only train the last layer of the MobileNet to perform our specific task</li>
+    </ul>
+  </li>
+  <li>Training:
+    <ul>
+      <li>Epochs: 50</li>
+      <li>Batch Size: 16</li>
+      <li>Learning Rate: 0.001</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="custom-moveit-library">Custom MoveIt Library</h2>
+<ul>
+  <li>Overview:
+    <ul>
+      <li>This package allows us to move our robot around while also avoiding objects by using different services.</li>
+    </ul>
+  </li>
+  <li>GetCartesianPath:
+    <ul>
+      <li>Moves the end-effector gripper in a straight line from start to end.</li>
+      <li>Uses multiple intermediate waypoints to ensure straight path.</li>
+    </ul>
+  </li>
+  <li>GetPositionIK:
+    <ul>
+      <li>Calculates possible joint positions of robot from a given start and end position and orientation for the end-effector.</li>
+      <li>Used to Orient the gripper without shifting the position .</li>
+      <li>Used to move the robot when straight movement is not necessary.</li>
+    </ul>
+  </li>
+  <li>GetPlanningScene:
+    <ul>
+      <li>The environment around the robot.</li>
+      <li>This allows us to add in the table, camera, and jenga tower to avoid collisions .</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="http://localhost:4000/assets/images/jenga-moveit1.png" alt="MoveIt Visual" /></p>
 
 <h2 id="source-code">Source code</h2>
-<p><a href="https://github.com/hang-yin/Rapidly-Exploring_Random_Tree">Github repo</a></p>
+<p><a href="https://github.com/hang-yin/Jenga-Assistance">Github repo</a></p>
+
+<h2 id="reference">Reference</h2>
+<ul>
+  <li>Howard, A., Zhu, M., Chen, B., Kalenichenko, D., Wang, W., Weyand, T., Andreetto, M., &amp; Adam, H. (2017). MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications. <a href="https://doi.org/10.48550/ARXIV.1704.04861">https://doi.org/10.48550/ARXIV.1704.04861</a></li>
+</ul>
+
+<h2 id="group-members">Group members</h2>
+<p>Hang Yin, Katie Hughes, Liz Metzger, Alyssa Chen</p>
 
         
       </section>
@@ -319,22 +395,22 @@
       <section class="page__share">
   
 
-  <a href="https://twitter.com/intent/tweet?text=RRT+for+path+planning+with+obstacles%20http%3A%2F%2Flocalhost%3A4000%2Fportfolio%2Frrt%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Robot+Jenga+Assistant%20http%3A%2F%2Flocalhost%3A4000%2Fportfolio_control_sw%2Fjenga%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fportfolio%2Frrt%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fportfolio_control_sw%2Fjenga%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fportfolio%2Frrt%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fportfolio_control_sw%2Fjenga%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/portfolio/quadrotor/" class="pagination--pager" title="Quadrotor Control
+      <a href="/portfolio_control_sw/IUKF/" class="pagination--pager" title="Distributed Invariant UKF with CI under Lie Group
 ">Previous</a>
     
     
-      <a href="/portfolio/slam/" class="pagination--pager" title="Feature-based EKF-SLAM from Scratch
+      <a href="/portfolio_control_sw/manipulation/" class="pagination--pager" title="KUKA youBot Mobile Manipulation
 ">Next</a>
     
   </nav>
